@@ -4,8 +4,7 @@ import langchain.llms
 from langchain.llms import OpenAI
  # To access the OpenAI environment, you can import it using your unique API key provided by OpenAI.
 import os
-
-api_key = os.environ['OPENAI_API_KEY']
+os.environ["OPENAI_API_KEY"] = "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"
 
  #  Let's import CharacterTextSplitter and break down our documents into small chunks. 
 from langchain.text_splitter import CharacterTextSplitter
