@@ -3,8 +3,10 @@ import langchain.llms
  # Let's import OpenAI library. 
 from langchain.llms import OpenAI
  # To access the OpenAI environment, you can import it using your unique API key provided by OpenAI.
+from dotenv import load_dotenv
 import os
-os.environ["OPENAI_API_KEY"] = "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"
+
+api_key = os.environ['OPENAI_API_KEY']
 
  #  Let's import CharacterTextSplitter and break down our documents into small chunks. 
 from langchain.text_splitter import CharacterTextSplitter
