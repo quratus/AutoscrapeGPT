@@ -3,7 +3,6 @@ import langchain.llms
  # Let's import OpenAI library. 
 from langchain.llms import OpenAI
  # To access the OpenAI environment, you can import it using your unique API key provided by OpenAI.
-from dotenv import load_dotenv
 import os
 
 api_key = os.environ['OPENAI_API_KEY']
