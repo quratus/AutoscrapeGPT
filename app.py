@@ -1,15 +1,6 @@
 import streamlit as st
-from scraping_functions import scrape_website, validate_url
+from scraping_functions import scrape_website
 import re
-
-
-# Usage example
-url = "https://www.example.com"
-
-if validate_url(url):
-    st.write("URL is valid")
-else:
-    st.write("Invalid URL")
 
 # URL input
 url_input = st.text_input("Enter the URL of the website to scrape:")
@@ -31,7 +22,7 @@ def perform_scraping(url, extract_paragraphs, extract_headings, extract_images):
     
     try:
         # Perform web scraping
-        scrape_website(url)
+        scrape_website(url, extract_paragraphs, extract_headings, extract_images)
         st.write("Web scraping completed successfully!")
     except Exception as e:
         st.write(f"An error occurred during web scraping: {str(e)}")
@@ -49,5 +40,3 @@ def validate_url(url):
 # Trigger web scraping when the button is clicked
 if scrape_button:
     perform_scraping(url_input, extract_paragraphs, extract_headings, extract_images)
-
-
