@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
 import os
+import streamlit as st
+
 
 def scrape_website(url, extract_paragraphs, extract_headings, extract_images):
     # Make a request to the URL and retrieve the HTML content
@@ -13,23 +15,31 @@ def scrape_website(url, extract_paragraphs, extract_headings, extract_images):
     # Extract the desired data based on user preferences
     extracted_data = []
     
-    # Example: Extract paragraphs
     if extract_paragraphs:
         paragraphs = soup.find_all('p')
         for paragraph in paragraphs:
-            extracted_data.append(paragraph.get_text())
+            paragraph_text = paragraph.get_text()
+            extracted_data.append(paragraph_text)
+            # Print the paragraph in Streamlit
+            st.write("Paragraph:", paragraph_text)
     
     # Example: Extract headings
     if extract_headings:
         headings = soup.find_all('h1')
         for heading in headings:
-            extracted_data.append(heading.get_text())
+            heading_text = heading.get_text()
+            extracted_data.append(heading_text)
+            # Print the heading in Streamlit
+            st.write("Heading:", heading_text)
     
     # Example: Extract images
     if extract_images:
         images = soup.find_all('img')
         for image in images:
-            extracted_data.append(image['src'])
+            image_src = image['src']
+            extracted_data.append(image_src)
+            # Print the image source in Streamlit
+            st.write("Image Source:", image_src)
     
     # Create the "data" folder if it doesn't exist
     if not os.path.exists('data'):
