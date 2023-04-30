@@ -1,20 +1,11 @@
 from bs4 import BeautifulSoup
+import requests
+import os
 
-def scrape_website(url):
+def scrape_website(url, extract_paragraphs, extract_headings, extract_images):
     # Make a request to the URL and retrieve the HTML content
-    # You can use libraries like requests to handle the HTTP request
-    # response = requests.get(url)
-    # html_content = response.text
-    
-    # For demonstration purposes, we'll use a sample HTML content
-    html_content = '''
-    <html>
-    <body>
-        <h1>Hello, World!</h1>
-        <p>This is an example paragraph.</p>
-    </body>
-    </html>
-    '''
+    response = requests.get(url)
+    html_content = response.text
     
     # Create a BeautifulSoup object to parse the HTML content
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -23,20 +14,28 @@ def scrape_website(url):
     extracted_data = []
     
     # Example: Extract paragraphs
-    paragraphs = soup.find_all('p')
-    for paragraph in paragraphs:
-        extracted_data.append(paragraph.get_text())
+    if extract_paragraphs:
+        paragraphs = soup.find_all('p')
+        for paragraph in paragraphs:
+            extracted_data.append(paragraph.get_text())
     
     # Example: Extract headings
-    headings = soup.find_all('h1')
-    for heading in headings:
-        extracted_data.append(heading.get_text())
+    if extract_headings:
+        headings = soup.find_all('h1')
+        for heading in headings:
+            extracted_data.append(heading.get_text())
     
     # Example: Extract images
-    images = soup.find_all('img')
-    for image in images:
-        extracted_data.append(image['src'])
+    if extract_images:
+        images = soup.find_all('img')
+        for image in images:
+            extracted_data.append(image['src'])
     
-    # Store the extracted data in a .txt file
-    with open('scraped_data.txt', 'w') as file:
+    # Create the "data" folder if it doesn't exist
+    if not os.path.exists('data'):
+        os.makedirs('data')
+    
+    # Create or update the .txt file with the scraped data
+    file_path = os.path.join('data', url.replace('/', '_') + '.txt')
+    with open(file_path, 'w') as file:
         file.write('\n'.join(extracted_data))
