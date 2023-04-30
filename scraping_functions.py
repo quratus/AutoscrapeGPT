@@ -41,11 +41,4 @@ def scrape_website(url, extract_paragraphs, extract_headings, extract_images):
             # Print the image source in Streamlit
             st.write("Image Source:", image_src)
     
-    # Create the "data" folder if it doesn't exist
-    if not os.path.exists('data'):
-        os.makedirs('data')
-    
-    # Create or update the .txt file with the scraped data
-    file_path = os.path.join('data', url.replace('/', '_') + '.txt')
-    with open(file_path, 'w') as file:
-        file.write('\n'.join(extracted_data))
+    return extracted_data

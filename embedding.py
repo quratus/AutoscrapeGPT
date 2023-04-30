@@ -10,7 +10,7 @@ os.environ["OPENAI_API_KEY"] = "sk-TkyQ3vXUJIButitlaxgZT3BlbkFJcqrEyAkHmoiv7CZWh
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores.faiss import FAISS
 from langchain.embeddings.openai import OpenAIEmbeddings
-from scraping_functions import scrape_website
+from scraping_functions import extracted_data
 
 text_splitter = CharacterTextSplitter(chunk_size=1500, separator="\n")
 docs = []

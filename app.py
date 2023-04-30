@@ -1,6 +1,12 @@
 import streamlit as st
 from scraping_functions import scrape_website
 import re
+from langchain.llms import OpenAI
+from langchain.text_splitter import CharacterTextSplitter
+from langchain.vectorstores.faiss import FAISS
+from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.chains.qa_with_sources import load_qa_with_sources_chain
+from embeddings import search_index
 
 # URL input
 url_input = st.text_input("Enter the URL of the website to scrape:")
